@@ -2,7 +2,7 @@
   color: darkgray;
   text-decoration: line-through;
 }
-span {
-    margin: auto;
-    margin-left: 10px;
+
+#item {
+justify-content: space-between;
 }

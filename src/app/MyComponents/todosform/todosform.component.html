@@ -1,1 +1,8 @@
-<p>todosform works!</p>
+<div class="input-group mb-3 w-100">
+    <input type="text" class="form-control" placeholder="Enter Todo Here ...." aria-label="Add Todo" aria-describedby="basic-addon2"
+    [(ngModel)] = "todotitle"
+    >
+    <div class="input-group-append">
+      <button (click) = "handleAdd()" class = "btn btn-primary">Add Todo </button>
+    </div>
+  </div>

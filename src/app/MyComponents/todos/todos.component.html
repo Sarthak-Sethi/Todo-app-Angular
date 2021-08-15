@@ -2,7 +2,7 @@
 
     <div *ngFor = "let todo of todos" class="text-white" >
         <ul class="list-group w-100">
-            <li class="list-group-item d-flex justify-contetn-between w-100">
+            <li class="list-group-item d-flex justify-contetn-between w-100"  id="item">
                 <span>
                     <input (change) = "changeStatus(todo) " type="checkbox" [checked] = "todo.isComplete">
                 </span>
@@ -12,7 +12,7 @@
                 <span [ngClass]=" {completedTodo : todo.isComplete} " >
                    {{todo.date | date }}
                 </span>
-                <span style="float:left;" >
+                <span >
                    <img (click) = "deleteTodo(todo)" class="align-items-left" src="../../../assets/trash.gif" alt="" style ="width: 40px;  ">
                  </span>
             </li>

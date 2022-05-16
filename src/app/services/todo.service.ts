@@ -11,13 +11,7 @@ export class TodoService {
   }
 
   getTodos(): Observable<Todo[]> {
-
-    return this.http.get<Todo[]>('http://localhost:8080/getTodos', {
-      headers: new HttpHeaders(
-        { Authorization: this.createBasicAuthenticationHttpHeader() }
-      )
-    }
-    );
+    return this.http.get<Todo[]>('http://localhost:8080/getTodos');
   }
 
   addTodo(todo: Todo) {
@@ -35,13 +29,6 @@ export class TodoService {
       return todo.id === everytodo.id;
     });
     this.todos.splice(index, 1);
-  }
-
-  createBasicAuthenticationHttpHeader(): string {
-    const username = 'sarthak';
-    const password = 'sarthak';
-    const basicAuthenticationHeaderString = 'Basic ' + window.btoa(username + ':' + password);
-    return basicAuthenticationHeaderString;
   }
 
 }

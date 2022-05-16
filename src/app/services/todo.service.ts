@@ -1,65 +1,47 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Todo } from "../TodoModel";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
   todos: Todo[] = [];
-  constructor() {
-    this.todos = [
-      {
-        id: "1",
-        title: "Angular Course from Coursera",
-        isComplete: false,
-        date: new Date()
-      },
-      {
-        id: "5",
-        title: "Tic Tac Toe using Angular",
-        isComplete: true,
-        date: new Date()
-      },
-      {
-        id: "2",
-        title: "Safe id of thomson reuters",
-        isComplete: false,
-        date: new Date()
-      },
-      {
-        id: "3",
-        title: "Update vaccination details in GSS",
-        isComplete: false,
-        date: new Date()
-      },
-      {
-        id: "4",
-        title: "Instagram Bot using Angular",
-        isComplete: false,
-        date: new Date()
-      },
-    ];
+  constructor(private http: HttpClient) {
   }
 
-  getTodos() {
-    return of(this.todos);
+  getTodos(): Observable<Todo[]> {
+
+    return this.http.get<Todo[]>('http://localhost:8080/getTodos', {
+      headers: new HttpHeaders(
+        { Authorization: this.createBasicAuthenticationHttpHeader() }
+      )
+    }
+    );
   }
 
   addTodo(todo: Todo) {
     this.todos.push(todo);
   }
 
-  changeStatus(todo : Todo){
+  changeStatus(todo: Todo) {
     this.todos.map((everytodo) => {
-      everytodo.id === todo.id ? everytodo.isComplete = !everytodo.isComplete : everytodo.isComplete = everytodo.isComplete ;
+      everytodo.id === todo.id ? everytodo.isComplete = !everytodo.isComplete : everytodo.isComplete = everytodo.isComplete;
     })
   }
 
-  deleteTodo(todo : Todo){
+  deleteTodo(todo: Todo) {
     const index = this.todos.findIndex((everytodo) => {
-      return todo.id === everytodo.id ;
+      return todo.id === everytodo.id;
     });
-    this.todos.splice(index,1);
+    this.todos.splice(index, 1);
+  }
+
+  createBasicAuthenticationHttpHeader(): string {
+    const username = 'sarthak';
+    const password = 'sarthak';
+    const basicAuthenticationHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+    return basicAuthenticationHeaderString;
   }
 
 }

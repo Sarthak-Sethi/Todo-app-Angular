@@ -14,8 +14,8 @@ export class TodoService {
     return this.http.get<Todo[]>('http://localhost:8080/getTodos');
   }
 
-  addTodo(todo: Todo) {
-    this.todos.push(todo);
+  addTodo(todo: Todo): Observable<any> {
+     return this.http.post<Todo>('http://localhost:8080/todos', todo);
   }
 
   changeStatus(todo: Todo) {

@@ -21,8 +21,9 @@ export class TodosformComponent implements OnInit {
       date: new Date(),
       isComplete: false,
     }
-    this.todoservice.addTodo(newTodo);
+    this.todoservice.addTodo(newTodo).subscribe((res)=>{console.log(res)});
     this.todotitle = "";
+
   }
 
 }
